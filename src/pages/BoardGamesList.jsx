@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 export default function BoardGamesList() {
 
-    const { boardGames, filteredBoardGames, search, setSearch } = useContext(GlobalContext)
+    const { boardGames, filteredBoardGames, search, setSearch, category, setCategory } = useContext(GlobalContext)
 
     return (
         <section>
@@ -17,6 +17,20 @@ export default function BoardGamesList() {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
+
+                <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}>
+                    <option value="seleziona">Seleziona</option>
+                    <option value="bluff">Bluff</option>
+                    <option value="cooperativo">Cooperativo</option>
+                    <option value="creativo">Creativo</option>
+                    <option value="deduzione">Deduzione</option>
+                    <option value="economico">Economico</option>
+                    <option value="investigativo">Investigativo</option>
+                    <option value="strategia">Strategia</option>
+                    <option value="party">Party</option>
+                </select>
             </div>
             {
                 filteredBoardGames.map((bg) => (

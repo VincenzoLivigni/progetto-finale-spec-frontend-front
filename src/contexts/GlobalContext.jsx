@@ -10,6 +10,7 @@ export function GlobalProvider({ children }) {
     const [boardGames, setBoardGames] = useState([])
 
     const [search, setSearch] = useState("")
+    const [category, setCategory] = useState("seleziona")
 
     const fetchProducts = async () => {
         try {
@@ -29,12 +30,15 @@ export function GlobalProvider({ children }) {
 
 
     const filteredBoardGames = useMemo(() => {
-        return boardGames.filter((bg) => bg.title.toLowerCase().includes(search.toLowerCase()))
-    }, [search, boardGames])
+        return boardGames.filter((bg) =>
+            bg.title.toLowerCase().includes(search.toLowerCase()) &&
+            (category === "seleziona" || bg.category === category)
+        )
+    }, [search, boardGames, category])
 
 
     return (
-        <GlobalContext.Provider value={{ boardGames, filteredBoardGames, search, setSearch }}>
+        <GlobalContext.Provider value={{ boardGames, filteredBoardGames, search, setSearch, category, setCategory }}>
             {children}
         </GlobalContext.Provider>
     )
