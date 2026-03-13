@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL;
 // console.log("API URL", API_URL,);
@@ -8,6 +8,8 @@ export const GlobalContext = createContext()
 export function GlobalProvider({ children }) {
 
     const [boardGames, setBoardGames] = useState([])
+
+    const [search, setSearch] = useState("")
 
     const fetchProducts = async () => {
         try {
@@ -26,8 +28,13 @@ export function GlobalProvider({ children }) {
     }, [])
 
 
+    const filteredBoardGames = useMemo(() => {
+        return boardGames.filter((bg) => bg.title.toLowerCase().includes(search.toLowerCase()))
+    }, [search, boardGames])
+
+
     return (
-        <GlobalContext.Provider value={{ boardGames }}>
+        <GlobalContext.Provider value={{ boardGames, filteredBoardGames, search, setSearch }}>
             {children}
         </GlobalContext.Provider>
     )
