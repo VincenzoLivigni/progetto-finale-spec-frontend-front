@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { GlobalContext } from "../contexts/GlobalContext"
+import { Link } from "react-router-dom"
 
 export default function BoardGamesList() {
 
@@ -12,7 +13,9 @@ export default function BoardGamesList() {
             {
                 boardGames.map((bg) => (
                     <div key={bg.id} className="card_list mb-4">
-                        <h5><span className="fw-bold">Titolo:</span> {bg.title}</h5>
+                        <Link to={`/boardgames/${bg.id}`}>
+                            <h5><span className="fw-bold">Titolo:</span> {bg.title}</h5>
+                        </Link>
                         <p><span className="fw-bold">Categoria:</span> {bg.category}</p>
                     </div>
                 ))
