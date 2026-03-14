@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 export default function BoardGamesList() {
 
-    const { boardGames, filteredBoardGames, search, setSearch, category, setCategory } = useContext(GlobalContext)
+    const { boardGames, filteredBoardGames, search, setSearch, category, setCategory, sortOrder, setSortOrder } = useContext(GlobalContext)
 
     return (
         <section>
@@ -30,6 +30,15 @@ export default function BoardGamesList() {
                     <option value="investigativo">Investigativo</option>
                     <option value="strategia">Strategia</option>
                     <option value="party">Party</option>
+                </select>
+
+                <span>Ordina per titolo</span>
+                <select
+                    value={sortOrder}
+                    onChange={(e) => setSortOrder(e.target.value)}>
+                    <option value="ordina">Ordina</option>
+                    <option value="A-Z">A-Z</option>
+                    <option value="Z-A">Z-A</option>
                 </select>
             </div>
             {
