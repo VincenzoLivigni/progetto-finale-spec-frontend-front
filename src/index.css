@@ -1,2 +1,35 @@
 @import url(bootstrap);
 @import url(bootstrap-icons);
+
+
+/* Comparazione */
+.compare_overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+}
+
+.compare {
+    width: 80%;
+    margin: auto;
+    background-color: white;
+    padding: 1.5rem;
+    display: flex;
+    gap: 3rem;
+    position: relative
+}
+
+.close_compare {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 5px;
+    right: 10px
+}

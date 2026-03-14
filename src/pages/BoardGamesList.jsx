@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 export default function BoardGamesList() {
 
-    const { boardGames, filteredBoardGames, search, setSearch, category, setCategory, sortOrder, setSortOrder } = useContext(GlobalContext)
+    const { filteredBoardGames, search, setSearch, category, setCategory, sortOrder, setSortOrder, compareGames, compareBoardGames, clearCompare } = useContext(GlobalContext)
 
     return (
         <section>
@@ -41,6 +41,7 @@ export default function BoardGamesList() {
                     <option value="Z-A">Z-A</option>
                 </select>
             </div>
+
             {
                 filteredBoardGames.map((bg) => (
                     <div key={bg.id} className="card_list mb-4">
@@ -48,9 +49,34 @@ export default function BoardGamesList() {
                             <h5><span className="fw-bold">Titolo:</span> {bg.title}</h5>
                         </Link>
                         <p><span className="fw-bold">Categoria:</span> {bg.category}</p>
+
+                        <button onClick={() => compareBoardGames(bg)}>
+                            {compareGames.find(game => game.id === bg.id)
+                                ? "Annulla confronto" : "Confronta"}
+                        </button>
                     </div>
                 ))
             }
+
+            {compareGames.length === 2 && (
+                <section className="compare_overlay">
+                    <div className="compare">
+                        {compareGames.map(game => (
+                            <div key={game.id} className="compare_card">
+                                <h5>Titolo: {game.title}</h5>
+                                <p>Categoria: {game.category}</p>
+                                <p>Descrizione: {game.description}</p>
+                                <p>Players: {game.minPlayers}-{game.maxPlayers}</p>
+                                <p>Prezzo: {game.price}€</p>
+                            </div>
+                        ))}
+
+                        <button onClick={clearCompare} className="close_compare">
+                            X
+                        </button>
+                    </div>
+                </section>
+            )}
         </section>
     )
 }

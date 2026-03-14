@@ -13,6 +13,8 @@ export function GlobalProvider({ children }) {
     const [category, setCategory] = useState("seleziona")
     const [sortOrder, setSortOrder] = useState("ordina")
 
+    const [compareGames, setCompareGames] = useState([])
+
     const fetchProducts = async () => {
         try {
             const res = await fetch(`${API_URL}/products`)
@@ -46,8 +48,39 @@ export function GlobalProvider({ children }) {
 
     }, [search, boardGames, category, sortOrder])
 
+
+    async function compareBoardGames(boardgame) {
+        try {
+            const res = await fetch(`${API_URL}/products/${boardgame.id}`)
+            const data = await res.json()
+            // console.log(data.product);
+
+            const selectedGame = data.product
+
+            setCompareGames(currentGames => {
+                const isSelected = currentGames.some((g) => g.id === selectedGame.id)
+
+                if (isSelected) {
+                    return currentGames.filter((g) => g.id !== selectedGame.id)
+                }
+
+                if (currentGames.length === 2) {
+                    return currentGames
+                }
+
+                return [...currentGames, selectedGame]
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    function clearCompare() {
+        setCompareGames([])
+    }
+
     return (
-        <GlobalContext.Provider value={{ boardGames, filteredBoardGames, search, setSearch, category, setCategory, sortOrder, setSortOrder }}>
+        <GlobalContext.Provider value={{ boardGames, filteredBoardGames, search, setSearch, category, setCategory, sortOrder, setSortOrder, compareGames, compareBoardGames, clearCompare }}>
             {children}
         </GlobalContext.Provider>
     )
