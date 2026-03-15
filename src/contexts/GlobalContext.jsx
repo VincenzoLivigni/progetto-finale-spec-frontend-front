@@ -15,6 +15,8 @@ export function GlobalProvider({ children }) {
 
     const [compareGames, setCompareGames] = useState([])
 
+    const [favorites, setFavorites] = useState([])
+
     const fetchProducts = async () => {
         try {
             const res = await fetch(`${API_URL}/products`)
@@ -31,7 +33,7 @@ export function GlobalProvider({ children }) {
         fetchProducts()
     }, [])
 
-
+    // filtraggio per nome, per categoria e ordinamento
     const filteredBoardGames = useMemo(() => {
         let filteredGames = boardGames.filter((bg) =>
             bg.title.toLowerCase().includes(search.toLowerCase()) &&
@@ -49,6 +51,7 @@ export function GlobalProvider({ children }) {
     }, [search, boardGames, category, sortOrder])
 
 
+    // comparazione
     async function compareBoardGames(boardgame) {
         try {
             const res = await fetch(`${API_URL}/products/${boardgame.id}`)
@@ -79,8 +82,26 @@ export function GlobalProvider({ children }) {
         setCompareGames([])
     }
 
+
+    // preferiti 
+    function toggleFavorites(boardgame) {
+        setFavorites(currentFavorites => {
+
+            const isInFavorite = currentFavorites.some((bg) => bg.id === boardgame.id)
+
+            if (isInFavorite) {
+                return currentFavorites.filter((bg) => bg.id !== boardgame.id)
+            }
+            return [...currentFavorites, boardgame]
+        })
+    }
+
+    function clearFavorites() {
+        setFavorites([])
+    }
+
     return (
-        <GlobalContext.Provider value={{ boardGames, filteredBoardGames, search, setSearch, category, setCategory, sortOrder, setSortOrder, compareGames, compareBoardGames, clearCompare }}>
+        <GlobalContext.Provider value={{ boardGames, filteredBoardGames, search, setSearch, category, setCategory, sortOrder, setSortOrder, compareGames, compareBoardGames, clearCompare, favorites, toggleFavorites, clearFavorites }}>
             {children}
         </GlobalContext.Provider>
     )
