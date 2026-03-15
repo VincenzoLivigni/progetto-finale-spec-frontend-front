@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { GlobalContext } from "../contexts/GlobalContext";
+import BoardGamesDetailCard from "../components/BoardGamesDetailCard";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function BoardGamesDetail() {
+
+    const { toggleFavorites, favorites } = useContext(GlobalContext)
 
     const { id } = useParams()
 
@@ -30,14 +34,12 @@ export default function BoardGamesDetail() {
             <h3>Dettaglio Gioco da tavolo</h3>
             {
                 boardgame && (
-                    <div className="card_bg_detail mb-4">
-                        <h5><span className="fw-bold">Titolo:</span> {boardgame.title}</h5>
-                        <p><span className="fw-bold">Categoria:</span> {boardgame.category}</p>
-                        <p><span className="fw-bold">Brand:</span> {boardgame.brand}</p>
-                        <p><span className="fw-bold">Description:</span> {boardgame.description}</p>
-                        <p><span className="fw-bold">Players:</span> {boardgame.minPlayers} - {boardgame.maxPlayers}</p>
-                        <p><span className="fw-bold">Price:</span> {boardgame.price}€</p>
-                    </div>
+                    <BoardGamesDetailCard
+                        key={boardgame.id}
+                        boardGame={boardgame}
+                        toggleFavorites={toggleFavorites}
+                        isFavorite={favorites.some((fav) => fav.id === boardgame.id)}
+                    />
                 )
             }
         </section>
