@@ -40,16 +40,26 @@ export function GlobalProvider({ children }) {
             (category === "seleziona" || bg.category === category)
         )
 
-        if (sortOrder === "A-Z") {
+        if (sortOrder === "titolo A-Z") {
             filteredGames = [...filteredGames].sort((a, z) => a.title.localeCompare(z.title))
-        } else if (sortOrder === "Z-A") {
+        } else if (sortOrder === "titolo Z-A") {
             filteredGames = [...filteredGames].sort((a, z) => z.title.localeCompare(a.title))
-        } else { sortOrder }
+        } else if (sortOrder === "categoria A-Z") {
+            filteredGames = [...filteredGames].sort((a, z) => a.category.localeCompare(z.category))
+        } else if (sortOrder === "categoria Z-A") {
+            filteredGames = [...filteredGames].sort((a, z) => z.category.localeCompare(a.category))
+        }
 
         return filteredGames
 
     }, [search, boardGames, category, sortOrder])
 
+
+    function filterReset() {
+        setSearch("")
+        setCategory("seleziona")
+        setSortOrder("ordina")
+    }
 
     // comparazione
     async function compareBoardGames(boardgame) {
@@ -101,7 +111,23 @@ export function GlobalProvider({ children }) {
     }
 
     return (
-        <GlobalContext.Provider value={{ boardGames, filteredBoardGames, search, setSearch, category, setCategory, sortOrder, setSortOrder, compareGames, compareBoardGames, clearCompare, favorites, toggleFavorites, clearFavorites }}>
+        <GlobalContext.Provider value={{
+            boardGames,
+            filteredBoardGames,
+            search,
+            setSearch,
+            category,
+            setCategory,
+            sortOrder,
+            setSortOrder,
+            compareGames,
+            compareBoardGames,
+            clearCompare,
+            favorites,
+            toggleFavorites,
+            clearFavorites,
+            filterReset
+        }}>
             {children}
         </GlobalContext.Provider>
     )
