@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { GlobalContext } from "../contexts/GlobalContext"
+import logo2 from "../assets/logo2.png"
 
 export default function OverlayCompare() {
 
@@ -12,17 +13,19 @@ export default function OverlayCompare() {
                     <section className="compare_overlay">
                         <div className="compare">
                             {compareGames.map(game => (
-                                <div key={game.id} className="compare_card">
-                                    <h5>Titolo: {game.title}</h5>
-                                    <p>Categoria: {game.category}</p>
-                                    <p>Descrizione: {game.description}</p>
-                                    <p>Giocatori: {game.minPlayers} - {game.maxPlayers}</p>
-                                    <p>Prezzo: {game.price}€</p>
+                                <div key={game.id} className="compare_card rounded-2">
+                                    <h5><span className="fw-bold">Titolo:</span> {game.title}</h5>
+                                    <p><span className="fw-bold">Categoria:</span> {game.category}</p>
+                                    <p className="description"><span className="fw-bold">Descrizione:</span> {game.description}</p>
+                                    <p><span className="fw-bold">Giocatori:</span> {game.minPlayers} - {game.maxPlayers}</p>
+                                    <p><span className="fw-bold">Prezzo:</span> {game.price}€</p>
                                 </div>
                             ))}
 
+                            <img src={logo2} className="logo_compare" />
+
                             <button onClick={clearCompare} className="close_compare">
-                                X
+                                <i className="bi bi-x fs-5"></i>
                             </button>
                         </div>
                     </section>

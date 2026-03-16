@@ -7,7 +7,11 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export default function BoardGamesDetail() {
 
-    const { toggleFavorites, favorites } = useContext(GlobalContext)
+    const {
+        compareGames,
+        compareBoardGames,
+        favorites,
+        toggleFavorites } = useContext(GlobalContext)
 
     const { id } = useParams()
 
@@ -29,19 +33,23 @@ export default function BoardGamesDetail() {
     }, [id])
 
     return (
-        <section>
+        <section className="py-4">
 
-            <h3>Dettaglio Gioco da tavolo</h3>
-            {
-                boardgame && (
-                    <BoardGamesDetailCard
-                        key={boardgame.id}
-                        boardGame={boardgame}
-                        toggleFavorites={toggleFavorites}
-                        isFavorite={favorites.some((fav) => fav.id === boardgame.id)}
-                    />
-                )
-            }
+            <div className="container">
+                <h3>Dettaglio Gioco da tavolo</h3>
+                {
+                    boardgame && (
+                        <BoardGamesDetailCard
+                            key={boardgame.id}
+                            boardGame={boardgame}
+                            compareBoardGames={compareBoardGames}
+                            isCompared={compareGames.some((game) => game.id === boardgame.id)}
+                            toggleFavorites={toggleFavorites}
+                            isFavorite={favorites.some((fav) => fav.id === boardgame.id)}
+                        />
+                    )
+                }
+            </div>
         </section>
     )
 }

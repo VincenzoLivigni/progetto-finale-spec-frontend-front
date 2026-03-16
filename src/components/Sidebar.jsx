@@ -19,7 +19,7 @@ export default function Sidebar() {
             </button>
 
             <div className="offcanvas-header">
-                <h1 className="offcanvas-title">Preferiti</h1>
+                <h3 className="offcanvas-title">Preferiti</h3>
                 <button type="button" className="btn-close" data-bs-dismiss="offcanvas"></button>
             </div>
 
