@@ -1,6 +1,108 @@
 @import url(bootstrap);
 @import url(bootstrap-icons);
 
+/* generics */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dd-primary-dark: #c97b2b;
+    --dd-primary-light: #e2b854;
+    --dd-secondary-dark: #562a69;
+    --dd-secondary-light: #6f397c;
+    --dd-black: #000000;
+    --dd-white: #ffffff;
+}
+
+h5 {
+    color: var(--dd-secondary-dark);
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* utils */
+.badge_category {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    color: var(--dd-white);
+    background-color: var(--dd-secondary-light);
+    border: none;
+    border-radius: 0rem 0rem 0.4rem 0.4rem;
+    position: absolute;
+    top: -6%;
+    right: 4%;
+    box-shadow: 0 0.5rem 1rem rgba(86, 42, 105, 0.25);
+}
+
+.btn-compare,
+.btn-clear_favorites {
+    color: white;
+    background-color: var(--dd-secondary-light);
+    font-weight: 500;
+    border: none;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.btn-compare:hover,
+.btn-favorite:hover,
+.btn-clear_favorites:hover {
+    transform: scale(1.025);
+    background: var(--dd-secondary-dark);
+}
+
+.btn-favorite {
+    padding: 2px;
+    background-color: var(--dd-secondary-light);
+    border: none;
+}
+
+.heart-active,
+.heart-inactive {
+    color: var(--dd-white);
+    font-size: 0.9rem;
+    padding: 2px 3px;
+}
+
+.heart-active {
+    color: var(--dd-primary-dark);
+}
+
+/* header */
+header {
+    height: 80px;
+    padding: 0;
+    background: linear-gradient(90deg, rgba(201, 123, 43, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(86, 42, 105, 1) 100%)
+}
+
+#logo {
+    height: 80px;
+}
+
+/* section lista */
+.section_list {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* Cards Lista */
+.card_list {
+    background: linear-gradient(145deg, rgba(250, 207, 164, 1), rgba(247, 163, 80, 1));
+    border: 2px solid var(--dd-secondary-light);
+    position: relative;
+    box-shadow: 0 0.5rem 1rem rgba(86, 42, 105, 0.25);
+}
+
+.card_list:hover {
+    transform: scale(1.025);
+    box-shadow: 0 0.75rem 1.5rem rgba(86, 42, 105, 0.3);
+}
 
 /* Comparazione */
 .compare_overlay {
@@ -37,12 +139,11 @@
 /* Sidebar */
 #offcanvas {
     width: 300px;
-
 }
 
 .favorite_btn {
     font-size: 1.25rem;
-    background-color: #ff8b07;
+    background-color: var(--dd-secondary-light);
     padding: 0.25rem;
     border: none;
     border-radius: 10px 0 0 10px;

@@ -1,6 +1,18 @@
+import { NavLink } from "react-router-dom"
+import logo from "../assets/logo.png"
+
 export default function Header() {
 
     return (
-        <h1>Header</h1>
+        <header>
+            <nav className="navbar navbar-expand-md p-0">
+                <div className="container-fluid justify-content-center">
+                    {/* Logo da inserire...  */}
+                    <NavLink to="/">
+                        <img id="logo" src={logo} alt="#" />
+                    </NavLink>
+                </div>
+            </nav>
+        </header>
     )
 }

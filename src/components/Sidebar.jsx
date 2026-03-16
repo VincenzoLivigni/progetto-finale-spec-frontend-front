@@ -1,15 +1,21 @@
 import { useContext } from "react"
 import { GlobalContext } from "../contexts/GlobalContext"
 import { Link } from "react-router-dom"
+import BoardGamesCard from "./BoardGamesCard"
 
 export default function Sidebar() {
 
-    const { favorites, toggleFavorites, clearFavorites } = useContext(GlobalContext)
+    const {
+        compareGames,
+        compareBoardGames,
+        favorites,
+        toggleFavorites,
+        clearFavorites } = useContext(GlobalContext)
 
     return (
         <div className="offcanvas offcanvas-end" id="offcanvas">
             <button className="favorite_btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
-                <span>💜</span>
+                <i className="bi bi-heart-fill heart-active fs-6 p-1"></i>
             </button>
 
             <div className="offcanvas-header">
@@ -22,21 +28,22 @@ export default function Sidebar() {
                     <p>Nessun preferito</p>
                 ) : (favorites.map(bg => (
                     <div key={bg.id}>
-                        <Link to={`/boardgames/${bg.id}`}>
-                            <h5><span className="fw-bold">Titolo:</span> {bg.title}</h5>
-                        </Link>
-
-                        <button onClick={() => toggleFavorites(bg)}>
-                            🧡
-                        </button>
+                        <BoardGamesCard
+                            bg={bg}
+                            compareBoardGames={compareBoardGames}
+                            isCompared={compareGames.some((game) => game.id === bg.id)}
+                            toggleFavorites={toggleFavorites}
+                            isFavorite={favorites.some((fav) => fav.id === bg.id)}
+                        />
                     </div>
                 ))
                 )
                 }
 
-                {favorites.length > 0 && <button onClick={clearFavorites} className="clear_favorites">
-                    Svuota preferiti
-                </button>
+                {favorites.length > 0 &&
+                    <button onClick={clearFavorites} className="btn-clear_favorites px-2 rounded-2">
+                        Svuota preferiti
+                    </button>
                 }
             </div>
         </div>
