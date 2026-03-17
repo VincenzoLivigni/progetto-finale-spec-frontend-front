@@ -15,7 +15,7 @@ export default function Filters() {
 
     return (
         <>
-            <button className="btn-collapse rounded-2 d-flex mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+            <button className="btn-collapse rounded-2 d-flex mb-3 mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
                 Filtra giochi da tavolo
                 <i className="bi bi-sort-down ms-1"></i>
             </button>
