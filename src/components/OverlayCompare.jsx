@@ -22,8 +22,6 @@ export default function OverlayCompare() {
                                 </div>
                             ))}
 
-                            <img src={logo2} className="logo_compare" />
-
                             <button onClick={clearCompare} className="close_compare">
                                 <i className="bi bi-x fs-5"></i>
                             </button>

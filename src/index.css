@@ -17,6 +17,18 @@
     --dd-white: #ffffff;
 }
 
+#root,
+html,
+body {
+    height: 100%;
+
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
 h3,
 h5 {
     color: var(--dd-secondary-dark);
@@ -118,19 +130,17 @@ header {
 
 /* main */
 main {
-    background-color: #ededed
+    background-color: #ededed;
+    flex: 1
 }
 
 /* filtri */
-.filters {
-    width: auto;
+.filters_card {
+    width: 100%;
     background-color: var(--dd-white);
     padding: 1rem;
     border: 2px solid var(--dd-secondary-light);
     border-radius: 0.375rem;
-    display: flex;
-    flex-direction: row;
-    gap: 3rem;
 }
 
 input,
@@ -191,23 +201,17 @@ label {
     position: fixed;
     top: 0;
     left: 0;
+    inset: 0;
 }
 
 .compare {
-    width: 80%;
+    width: 90%;
     background-color: #ededed;
     border-radius: 0.375rem;
     padding: 2rem;
     display: flex;
     gap: 2rem;
     position: relative
-}
-
-.logo_compare {
-    width: 110px;
-    right: 44.3%;
-    top: 44.1%;
-    position: absolute;
 }
 
 .compare_card {
@@ -253,4 +257,48 @@ label {
 /* Footer */
 footer {
     border-top: 2px solid var(--dd-secondary-light);
+}
+
+@media (max-width: 992px) {
+
+    /* Comparazione */
+    .compare {
+        height: 80vh;
+    }
+
+    .compare_card {
+        overflow-y: scroll;
+    }
+
+    .compare_card::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .compare_card::-webkit-scrollbar-track {
+        background-color: #aa9c9c;
+        border-radius: 0.5rem;
+    }
+
+    .compare_card::-webkit-scrollbar-thumb {
+        background: var(--dd-secondary-light);
+        border-radius: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+
+    /* filtri */
+    .filters section {
+        width: 100%;
+    }
+
+    input,
+    select {
+        width: 100%;
+    }
+
+    /* Comparazione */
+    .compare {
+        flex-direction: column;
+    }
 }

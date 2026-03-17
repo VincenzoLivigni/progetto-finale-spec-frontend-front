@@ -11,7 +11,7 @@ export default function BoardGamesCard({ bg, compareBoardGames, isCompared, togg
                 <p><span className="badge_category fw-bold">{bg.category}</span> </p>
 
                 <button onClick={() => compareBoardGames(bg)} className="btn-compare me-3 px-2 rounded-2">
-                    {isCompared ? "Annulla confronto" : "Confronta"}
+                    {isCompared ? "Annulla" : "Confronta"}
                 </button>
 
                 <button onClick={() => toggleFavorites(bg)} className="btn-favorite px-1 rounded-2">
