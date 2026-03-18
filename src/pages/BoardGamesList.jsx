@@ -12,6 +12,7 @@ export default function BoardGamesList() {
         compareBoardGames,
         favorites,
         toggleFavorites,
+        error
     } = useContext(GlobalContext)
 
     return (
@@ -21,20 +22,27 @@ export default function BoardGamesList() {
 
                 <Filters />
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 mt-5">
-                    {filteredBoardGames.length === 0 ? (
-                        <p className="empty_states">Nessun gioco trovato</p>
-                    ) : (filteredBoardGames.map((bg) => (
-                        <div key={bg.id} className="col">
-                            <BoardGamesCard
-                                bg={bg}
-                                compareBoardGames={compareBoardGames}
-                                isCompared={compareGames.some((game) => game.id === bg.id)}
-                                toggleFavorites={toggleFavorites}
-                                isFavorite={favorites.some((fav) => fav.id === bg.id)}
-                            />
-                        </div>
-                    ))
-                    )}
+                    {
+                        error === true ? (
+                            <p className="error">Oops... Si è verificato un errore nel caricamento dei giochi</p>
+                        ) :
+
+                            filteredBoardGames.length === 0 ? (
+                                <p className="empty_states">Nessun gioco trovato</p>
+                            ) :
+
+                                filteredBoardGames.map((bg) => (
+                                    <div key={bg.id} className="col">
+                                        <BoardGamesCard
+                                            bg={bg}
+                                            compareBoardGames={compareBoardGames}
+                                            isCompared={compareGames.some((game) => game.id === bg.id)}
+                                            toggleFavorites={toggleFavorites}
+                                            isFavorite={favorites.some((fav) => fav.id === bg.id)}
+                                        />
+                                    </div>
+                                ))
+                    }
                 </div>
 
                 <OverlayCompare />

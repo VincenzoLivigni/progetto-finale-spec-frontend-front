@@ -1,5 +1,17 @@
-import { useContext } from "react"
+import { useCallback, useContext } from "react"
 import { GlobalContext } from "../contexts/GlobalContext"
+
+
+function debounce(callback, delay) {
+    let timer;
+
+    return (value) => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+            callback(value)
+        }, delay)
+    }
+}
 
 export default function Filters() {
 
@@ -12,6 +24,10 @@ export default function Filters() {
         setSortOrder,
         filterReset
     } = useContext(GlobalContext)
+
+    const debounceSetSearch = useCallback(
+        debounce(setSearch, 500)
+        , [])
 
     return (
         <>
@@ -33,8 +49,7 @@ export default function Filters() {
                                     <input
                                         type="text"
                                         placeholder="Cerca..."
-                                        value={search}
-                                        onChange={(e) => setSearch(e.target.value)}
+                                        onChange={(e) => debounceSetSearch(e.target.value)}
                                     />
                                 </section>
 

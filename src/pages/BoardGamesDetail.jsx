@@ -17,14 +17,22 @@ export default function BoardGamesDetail() {
 
     const [boardgame, setBoardGame] = useState(null)
 
+    const [error, setError] = useState(false)
+
     const fetchBoardGamesDetail = async () => {
         try {
             const res = await fetch(`${API_URL}/products/${id}`)
+
+            if (!res.ok) {
+                throw new Error(`Errore: ${res.status}`)
+            }
+
             const data = await res.json()
             setBoardGame(data.product)
         }
         catch (err) {
             console.log("Errore nella ricezione dei dettagli dei giochi da tavolo", err);
+            setError(true)
         }
     }
 
@@ -38,16 +46,20 @@ export default function BoardGamesDetail() {
             <div className="container">
                 <h3>Dettaglio Gioco da tavolo</h3>
                 {
-                    boardgame && (
-                        <BoardGamesDetailCard
-                            key={boardgame.id}
-                            boardGame={boardgame}
-                            compareBoardGames={compareBoardGames}
-                            isCompared={compareGames.some((game) => game.id === boardgame.id)}
-                            toggleFavorites={toggleFavorites}
-                            isFavorite={favorites.some((fav) => fav.id === boardgame.id)}
-                        />
-                    )
+                    error === true ? (
+                        <p className="error">Oops... Si è verificato un errore nel caricamento del gioco</p>
+                    ) :
+
+                        boardgame && (
+                            <BoardGamesDetailCard
+                                key={boardgame.id}
+                                boardGame={boardgame}
+                                compareBoardGames={compareBoardGames}
+                                isCompared={compareGames.some((game) => game.id === boardgame.id)}
+                                toggleFavorites={toggleFavorites}
+                                isFavorite={favorites.some((fav) => fav.id === boardgame.id)}
+                            />
+                        )
                 }
             </div>
         </section>

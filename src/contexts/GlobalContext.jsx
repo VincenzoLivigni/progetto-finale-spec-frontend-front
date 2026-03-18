@@ -18,15 +18,23 @@ export function GlobalProvider({ children }) {
 
     const [favorites, setFavorites] = useStorage("favorites", [])
 
+    const [error, setError] = useState(false)
+
     const fetchProducts = async () => {
         try {
             const res = await fetch(`${API_URL}/products`)
+
+            if (!res.ok) {
+                throw new Error(`Errore: ${res.status}`)
+            }
+
             const data = await res.json()
             // console.log("Dati ricevuti con successo", data);
             setBoardGames(data)
         }
         catch (err) {
             console.log("Errore nella ricezione dei dati", err);
+            setError(true)
         }
     }
 
@@ -63,9 +71,14 @@ export function GlobalProvider({ children }) {
     }
 
     // comparazione
-    async function compareBoardGames(boardgame) {
+    async function compareBoardGames(bg) {
         try {
-            const res = await fetch(`${API_URL}/products/${boardgame.id}`)
+            const res = await fetch(`${API_URL}/products/${bg.id}`)
+
+            if (!res.ok) {
+                throw new Error(`Errore: ${res.status}`)
+            }
+
             const data = await res.json()
             // console.log(data.product);
 
@@ -86,6 +99,7 @@ export function GlobalProvider({ children }) {
             })
         } catch (err) {
             console.log(err)
+            setError(true)
         }
     }
 
@@ -127,7 +141,8 @@ export function GlobalProvider({ children }) {
             favorites,
             toggleFavorites,
             clearFavorites,
-            filterReset
+            filterReset,
+            error
         }}>
             {children}
         </GlobalContext.Provider>
