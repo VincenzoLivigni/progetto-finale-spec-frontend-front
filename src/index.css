@@ -44,6 +44,12 @@ p {
 }
 
 /* utils */
+.empty_states {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--dd-secondary-light);
+}
+
 .badge_category {
     font-size: 0.8rem;
     padding: 2px 8px;
@@ -157,7 +163,7 @@ input:focus-visible {
     outline: none
 }
 
-label {
+.filters span {
     color: var(--dd-secondary-dark);
     font-weight: 500;
     display: block;

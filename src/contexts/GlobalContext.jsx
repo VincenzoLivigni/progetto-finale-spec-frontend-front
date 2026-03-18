@@ -1,4 +1,5 @@
 import { createContext, useEffect, useMemo, useState } from "react";
+import useStorage from "../hooks/useStorage";
 
 const API_URL = import.meta.env.VITE_API_URL;
 // console.log("API URL", API_URL,);
@@ -15,7 +16,7 @@ export function GlobalProvider({ children }) {
 
     const [compareGames, setCompareGames] = useState([])
 
-    const [favorites, setFavorites] = useState([])
+    const [favorites, setFavorites] = useStorage("favorites", [])
 
     const fetchProducts = async () => {
         try {

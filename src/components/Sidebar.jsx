@@ -25,7 +25,7 @@ export default function Sidebar() {
 
             <div className="offcanvas-body">
                 {favorites.length === 0 ? (
-                    <p>Nessun preferito</p>
+                    <p className="empty_states">Nessun preferito</p>
                 ) : (favorites.map(bg => (
                     <div key={bg.id}>
                         <BoardGamesCard

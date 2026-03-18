@@ -16,8 +16,8 @@ export default function Filters() {
     return (
         <>
             <button className="btn-collapse rounded-2 d-flex mb-3 mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                Filtra giochi da tavolo
-                <i className="bi bi-sort-down ms-1"></i>
+                Filtra giochi
+                <i className="bi bi-filter ms-1"></i>
             </button>
 
 
@@ -29,7 +29,7 @@ export default function Filters() {
                         <div className="filters">
                             <div className="row g-3">
                                 <section className="col-6 col-lg-3">
-                                    <label>Cerca giochi da tavolo</label>
+                                    <span>Cerca giochi da tavolo</span>
                                     <input
                                         type="text"
                                         placeholder="Cerca..."
@@ -39,7 +39,7 @@ export default function Filters() {
                                 </section>
 
                                 <section className="col-6 col-lg-3">
-                                    <label>Filtra per categioria</label>
+                                    <span>Filtra per categioria</span>
                                     <select
                                         value={category}
                                         onChange={(e) => setCategory(e.target.value)}>
@@ -56,7 +56,7 @@ export default function Filters() {
                                 </section>
 
                                 <section className="col-6 col-lg-3">
-                                    <label>Ordina per titolo</label>
+                                    <span>Ordina per titolo</span>
                                     <select
                                         value={sortOrder}
                                         onChange={(e) => setSortOrder(e.target.value)}>
@@ -67,7 +67,7 @@ export default function Filters() {
                                 </section>
 
                                 <section className="col-6 col-lg-3">
-                                    <label>Ordina per categoria</label>
+                                    <span>Ordina per categoria</span>
                                     <select
                                         value={sortOrder}
                                         onChange={(e) => setSortOrder(e.target.value)}>
