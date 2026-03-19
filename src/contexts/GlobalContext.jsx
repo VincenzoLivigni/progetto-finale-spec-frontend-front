@@ -7,6 +7,7 @@ export const GlobalContext = createContext()
 
 export function GlobalProvider({ children }) {
 
+    // stati 
     const [boardGames, setBoardGames] = useState([])
 
     const [search, setSearch] = useState("")
@@ -19,6 +20,7 @@ export function GlobalProvider({ children }) {
 
     const [error, setError] = useState(false)
 
+    // recupero dati dei giochi dall'API 
     const fetchProducts = async () => {
         try {
             const res = await fetch(`${API_URL}/products`)
@@ -40,13 +42,19 @@ export function GlobalProvider({ children }) {
         fetchProducts()
     }, [])
 
-    // filtraggio per nome, per categoria e ordinamento
+
+    // getione filtraggio
+
+    // con useMemo memorizzo i risultati dei filtraggi evitando ricalcoli inutili
     const filteredBoardGames = useMemo(() => {
         let filteredGames = boardGames.filter((bg) =>
+            // filtraggio per nome
             bg.title.toLowerCase().includes(search.toLowerCase()) &&
+            // filtraggio per categoria
             (category === "seleziona" || bg.category === category)
         )
 
+        // ordinamento
         if (sortOrder === "titolo A-Z") {
             filteredGames = [...filteredGames].sort((a, z) => a.title.localeCompare(z.title))
         } else if (sortOrder === "titolo Z-A") {
@@ -61,13 +69,18 @@ export function GlobalProvider({ children }) {
 
     }, [search, boardGames, category, sortOrder])
 
+
+    // reset dei filtri
+
+    // con useCallback memorizzo la funzione per evitare che venga ricreata ad ogni render
     const filterReset = useCallback(() => {
         setSearch("")
         setCategory("seleziona")
         setSortOrder("ordina")
     }, [setSearch, setCategory, setSortOrder])
 
-    // comparazione
+
+    // gestione comparazione
     const compareBoardGames = useCallback(async (bg) => {
         try {
             const res = await fetch(`${API_URL}/products/${bg.id}`)
@@ -78,15 +91,19 @@ export function GlobalProvider({ children }) {
 
             const data = await res.json()
 
+            // gioco cliccato con i suoi dettagli
             const selectedGame = data.product
 
             setCompareGames(currentGames => {
+                // se il gioco è già stato selezionato
                 const isSelected = currentGames.some((g) => g.id === selectedGame.id)
 
+                // lo rimuovo
                 if (isSelected) {
                     return currentGames.filter((g) => g.id !== selectedGame.id)
                 }
 
+                // max 2 giochi
                 if (currentGames.length === 2) {
                     return currentGames
                 }
@@ -99,16 +116,20 @@ export function GlobalProvider({ children }) {
         }
     }, [setCompareGames])
 
+
+    // reset comparazione
     const clearCompare = useCallback(() => {
         setCompareGames([])
     }, [setCompareGames])
 
-    // preferiti 
+    // gestione preferiti 
     const toggleFavorites = useCallback((boardgame) => {
         setFavorites(currentFavorites => {
 
+            // se il gioco è già stato selezionato
             const isInFavorite = currentFavorites.some((bg) => bg.id === boardgame.id)
 
+            // lo rimuovo
             if (isInFavorite) {
                 return currentFavorites.filter((bg) => bg.id !== boardgame.id)
             }
@@ -116,11 +137,14 @@ export function GlobalProvider({ children }) {
         })
     }, [setFavorites])
 
+
+    // reset preferiti
     const clearFavorites = useCallback(() => {
         setFavorites([])
     }, [setFavorites])
 
     return (
+        // rendo disponibili e riutilizzabili dati e funzioni nell'app
         <GlobalContext.Provider value={{
             boardGames,
             filteredBoardGames,

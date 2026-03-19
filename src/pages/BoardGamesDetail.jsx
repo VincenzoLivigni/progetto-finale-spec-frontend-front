@@ -15,10 +15,12 @@ export default function BoardGamesDetail() {
 
     const { id } = useParams()
 
+    // stati
     const [boardgame, setBoardGame] = useState(null)
 
     const [error, setError] = useState(false)
 
+    // recupero dati del gioco con id specifico dall'API
     const fetchBoardGamesDetail = async () => {
         try {
             const res = await fetch(`${API_URL}/products/${id}`)
@@ -46,10 +48,12 @@ export default function BoardGamesDetail() {
             <div className="container">
                 <h3>Dettaglio Gioco da tavolo</h3>
                 {
+                    // messaggio di errore in caso di problemi con l'api
                     error === true ? (
                         <p className="error">Oops... Si è verificato un errore nel caricamento del gioco</p>
                     ) :
 
+                        // dettaglio gioco + gestione comparazione e preferiti
                         boardgame && (
                             <BoardGamesDetailCard
                                 key={boardgame.id}

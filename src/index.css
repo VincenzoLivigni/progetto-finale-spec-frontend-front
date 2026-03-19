@@ -35,6 +35,10 @@ h5 {
     text-decoration: none;
 }
 
+h5 {
+    min-height: 3rem;
+}
+
 a {
     text-decoration: none;
 }
@@ -199,10 +203,6 @@ input:focus-visible {
     flex-direction: column;
 }
 
-.card_title {
-    min-height: 3rem;
-}
-
 .card_list:hover {
     transform: scale(1.025);
     box-shadow: 0 0.75rem 1.5rem rgba(86, 42, 105, 0.3);
@@ -258,6 +258,10 @@ input:focus-visible {
 #offcanvas {
     width: 300px;
     background-color: #ededed;
+}
+
+.offcanvas-header {
+    border-bottom: 2px solid var(--dd-secondary-light);
 }
 
 .favorite_btn {

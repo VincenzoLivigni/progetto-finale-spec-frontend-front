@@ -25,20 +25,24 @@ export default function Sidebar() {
 
             <div className="offcanvas-body">
 
-                {favorites.length === 0 ? (
-                    <p className="empty_states">Nessun preferito</p>
-                ) : (favorites.map(bg => (
-                    <div key={bg.id}>
-                        <BoardGamesCard
-                            bg={bg}
-                            compareBoardGames={compareBoardGames}
-                            isCompared={compareGames.some((game) => game.id === bg.id)}
-                            toggleFavorites={toggleFavorites}
-                            isFavorite={favorites.some((fav) => fav.id === bg.id)}
-                        />
-                    </div>
-                ))
-                )
+                {
+                    // gestione stato vuoto
+                    favorites.length === 0 ? (
+                        <p className="empty_states">Nessun preferito</p>
+                    ) :
+
+                        // preferiti + gestione comparazione e preferiti
+                        favorites.map(bg => (
+                            <div key={bg.id}>
+                                <BoardGamesCard
+                                    bg={bg}
+                                    compareBoardGames={compareBoardGames}
+                                    isCompared={compareGames.some((game) => game.id === bg.id)}
+                                    toggleFavorites={toggleFavorites}
+                                    isFavorite={favorites.some((fav) => fav.id === bg.id)}
+                                />
+                            </div>
+                        ))
                 }
 
                 {favorites.length > 0 &&

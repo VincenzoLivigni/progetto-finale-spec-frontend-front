@@ -24,6 +24,8 @@ export default function Filters() {
         filterReset
     } = useContext(GlobalContext)
 
+    // con useCallback memorizzo la funzione per evitare che venga ricreata ad ogni render
+    // con debounce ritardo l'aggiornamento della ricerca per ridurre i re-render quando l'utente digita nell'input
     const debounceSetSearch = useCallback(
         debounce(setSearch, 500)
         , [])
@@ -43,6 +45,7 @@ export default function Filters() {
                         <div className="filters">
                             <div className="row g-3">
 
+                                {/* filro titolo */}
                                 <section className="col-6 col-lg-3">
                                     <span>Cerca giochi da tavolo</span>
                                     <input
@@ -52,6 +55,7 @@ export default function Filters() {
                                     />
                                 </section>
 
+                                {/* filtro categoria */}
                                 <section className="col-6 col-lg-3">
                                     <span>Filtra per categioria</span>
                                     <select
@@ -69,6 +73,7 @@ export default function Filters() {
                                     </select>
                                 </section>
 
+                                {/* ordinamento titolo */}
                                 <section className="col-6 col-lg-3">
                                     <span>Ordina per titolo</span>
                                     <select
@@ -80,6 +85,7 @@ export default function Filters() {
                                     </select>
                                 </section>
 
+                                {/* ordinamento per categoria */}
                                 <section className="col-6 col-lg-3">
                                     <span>Ordina per categoria</span>
                                     <select
@@ -94,6 +100,7 @@ export default function Filters() {
                             </div>
                         </div>
 
+                        {/* reset filtri */}
                         <div>
                             <button className="btn-reset_filter rounded-2 px-2 mt-4" onClick={filterReset}>Reset filtri</button>
                         </div>

@@ -13,10 +13,12 @@ function BoardGamesCard({ bg, compareBoardGames, isCompared, toggleFavorites, is
 
                 <p><span className="badge_category fw-bold">{bg.category}</span> </p>
 
+                {/* toggle comparazione */}
                 <button onClick={() => compareBoardGames(bg)} className="btn-compare me-3 px-2 rounded-2">
                     {isCompared ? "Annulla" : "Confronta"}
                 </button>
 
+                {/* toggle preferiti */}
                 <button onClick={() => toggleFavorites(bg)} className="btn-favorite px-1 rounded-2">
                     {isFavorite ? <i className="bi bi-heart-fill heart-active"></i> : <i className="bi bi-heart-fill heart-inactive"></i>}
                 </button>
@@ -25,4 +27,5 @@ function BoardGamesCard({ bg, compareBoardGames, isCompared, toggleFavorites, is
     )
 }
 
+// evito re-render se le props non cambiano
 export default memo(BoardGamesCard)
