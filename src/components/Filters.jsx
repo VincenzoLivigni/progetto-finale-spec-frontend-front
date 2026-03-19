@@ -16,7 +16,6 @@ function debounce(callback, delay) {
 export default function Filters() {
 
     const {
-        search,
         setSearch,
         category,
         setCategory,
@@ -41,9 +40,9 @@ export default function Filters() {
                 <div className="card_collapse">
                     <div className="filters_card">
 
-
                         <div className="filters">
                             <div className="row g-3">
+
                                 <section className="col-6 col-lg-3">
                                     <span>Cerca giochi da tavolo</span>
                                     <input
@@ -91,6 +90,7 @@ export default function Filters() {
                                         <option value="categoria Z-A">Z-A</option>
                                     </select>
                                 </section>
+
                             </div>
                         </div>
 
@@ -99,8 +99,8 @@ export default function Filters() {
                         </div>
 
                     </div>
-                </div >
-            </div >
+                </div>
+            </div>
         </>
     )
 }

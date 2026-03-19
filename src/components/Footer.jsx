@@ -14,6 +14,7 @@ export default function Footer() {
                     <p className="mb-3">Scopri e confronta i migliori giochi da tavolo </p>
                     <small className="text-muted">© 2026 Dice Duel App</small>
                 </div>
+
             </div>
         </footer>
     )

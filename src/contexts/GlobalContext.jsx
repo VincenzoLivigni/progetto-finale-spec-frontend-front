@@ -2,7 +2,6 @@ import { createContext, useCallback, useEffect, useMemo, useState } from "react"
 import useStorage from "../hooks/useStorage";
 
 const API_URL = import.meta.env.VITE_API_URL;
-// console.log("API URL", API_URL,);
 
 export const GlobalContext = createContext()
 
@@ -29,7 +28,6 @@ export function GlobalProvider({ children }) {
             }
 
             const data = await res.json()
-            // console.log("Dati ricevuti con successo", data);
             setBoardGames(data)
         }
         catch (err) {
@@ -63,7 +61,6 @@ export function GlobalProvider({ children }) {
 
     }, [search, boardGames, category, sortOrder])
 
-
     const filterReset = useCallback(() => {
         setSearch("")
         setCategory("seleziona")
@@ -80,7 +77,6 @@ export function GlobalProvider({ children }) {
             }
 
             const data = await res.json()
-            // console.log(data.product);
 
             const selectedGame = data.product
 
@@ -106,7 +102,6 @@ export function GlobalProvider({ children }) {
     const clearCompare = useCallback(() => {
         setCompareGames([])
     }, [setCompareGames])
-
 
     // preferiti 
     const toggleFavorites = useCallback((boardgame) => {

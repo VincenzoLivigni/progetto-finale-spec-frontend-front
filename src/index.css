@@ -44,6 +44,14 @@ p {
 }
 
 /* utils */
+.link {
+    color: #6f397c;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
 .empty_states {
     font-size: 1.25rem;
     font-weight: 500;
