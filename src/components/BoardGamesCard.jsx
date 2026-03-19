@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
-export default function BoardGamesCard({ bg, compareBoardGames, isCompared, toggleFavorites, isFavorite }) {
+function BoardGamesCard({ bg, compareBoardGames, isCompared, toggleFavorites, isFavorite }) {
 
     return (
         <div className="card_list mb-4 p-4 rounded-2">
@@ -21,3 +22,5 @@ export default function BoardGamesCard({ bg, compareBoardGames, isCompared, togg
         </div>
     )
 }
+
+export default memo(BoardGamesCard)

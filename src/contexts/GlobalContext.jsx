@@ -1,4 +1,4 @@
-import { createContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import useStorage from "../hooks/useStorage";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -64,14 +64,14 @@ export function GlobalProvider({ children }) {
     }, [search, boardGames, category, sortOrder])
 
 
-    function filterReset() {
+    const filterReset = useCallback(() => {
         setSearch("")
         setCategory("seleziona")
         setSortOrder("ordina")
-    }
+    }, [setSearch, setCategory, setSortOrder])
 
     // comparazione
-    async function compareBoardGames(bg) {
+    const compareBoardGames = useCallback(async (bg) => {
         try {
             const res = await fetch(`${API_URL}/products/${bg.id}`)
 
@@ -101,15 +101,15 @@ export function GlobalProvider({ children }) {
             console.log(err)
             setError(true)
         }
-    }
+    }, [setCompareGames])
 
-    function clearCompare() {
+    const clearCompare = useCallback(() => {
         setCompareGames([])
-    }
+    }, [setCompareGames])
 
 
     // preferiti 
-    function toggleFavorites(boardgame) {
+    const toggleFavorites = useCallback((boardgame) => {
         setFavorites(currentFavorites => {
 
             const isInFavorite = currentFavorites.some((bg) => bg.id === boardgame.id)
@@ -119,11 +119,11 @@ export function GlobalProvider({ children }) {
             }
             return [...currentFavorites, boardgame]
         })
-    }
+    }, [setFavorites])
 
-    function clearFavorites() {
+    const clearFavorites = useCallback(() => {
         setFavorites([])
-    }
+    }, [setFavorites])
 
     return (
         <GlobalContext.Provider value={{

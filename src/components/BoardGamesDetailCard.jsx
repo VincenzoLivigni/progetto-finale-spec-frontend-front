@@ -1,4 +1,6 @@
-export default function BoardGamesDetailCard({ boardGame, compareBoardGames, isCompared, toggleFavorites, isFavorite }) {
+import { memo } from "react"
+
+function BoardGamesDetailCard({ boardGame, compareBoardGames, isCompared, toggleFavorites, isFavorite }) {
 
     return (
         <div className="card_bg_detail rounded-2 p-4 my-4">
@@ -19,3 +21,5 @@ export default function BoardGamesDetailCard({ boardGame, compareBoardGames, isC
         </div>
     )
 }
+
+export default memo(BoardGamesDetailCard)
