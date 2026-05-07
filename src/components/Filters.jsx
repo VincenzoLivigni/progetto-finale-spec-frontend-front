@@ -1,4 +1,4 @@
-import { useCallback, useContext } from "react"
+import { useContext, useMemo } from "react"
 import { GlobalContext } from "../contexts/GlobalContext"
 
 
@@ -19,16 +19,18 @@ export default function Filters() {
         setSearch,
         category,
         setCategory,
-        sortOrder,
-        setSortOrder,
+        sortTitleOrder,
+        setSortTitleOrder,
+        sortCategoryOrder,
+        setSortCategoryOrder,
         filterReset
     } = useContext(GlobalContext)
 
-    // con useCallback memorizzo la funzione per evitare che venga ricreata ad ogni render
+    // con useMemo memorizzo la funzione debounce evitando che venga ricreata ad ogni render
     // con debounce ritardo l'aggiornamento della ricerca per ridurre i re-render quando l'utente digita nell'input
-    const debounceSetSearch = useCallback(
+    const debounceSetSearch = useMemo(() =>
         debounce(setSearch, 500)
-        , [])
+        , [setSearch])
 
     return (
         <>
@@ -77,8 +79,8 @@ export default function Filters() {
                                 <section className="col-6 col-lg-3">
                                     <span>Ordina per titolo</span>
                                     <select
-                                        value={sortOrder}
-                                        onChange={(e) => setSortOrder(e.target.value)}>
+                                        value={sortTitleOrder}
+                                        onChange={(e) => setSortTitleOrder(e.target.value)}>
                                         <option value="ordina">Ordina</option>
                                         <option value="titolo A-Z">A-Z</option>
                                         <option value="titolo Z-A">Z-A</option>
@@ -89,8 +91,8 @@ export default function Filters() {
                                 <section className="col-6 col-lg-3">
                                     <span>Ordina per categoria</span>
                                     <select
-                                        value={sortOrder}
-                                        onChange={(e) => setSortOrder(e.target.value)}>
+                                        value={sortCategoryOrder}
+                                        onChange={(e) => setSortCategoryOrder(e.target.value)}>
                                         <option value="ordina">Ordina</option>
                                         <option value="categoria A-Z">A-Z</option>
                                         <option value="categoria Z-A">Z-A</option>

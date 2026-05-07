@@ -12,7 +12,8 @@ export function GlobalProvider({ children }) {
 
     const [search, setSearch] = useState("")
     const [category, setCategory] = useState("seleziona")
-    const [sortOrder, setSortOrder] = useState("ordina")
+    const [sortTitleOrder, setSortTitleOrder] = useState("ordina")
+    const [sortCategoryOrder, setSortCategoryOrder] = useState("ordina")
 
     const [compareGames, setCompareGames] = useState([])
 
@@ -54,20 +55,23 @@ export function GlobalProvider({ children }) {
             (category === "seleziona" || bg.category === category)
         )
 
-        // ordinamento
-        if (sortOrder === "titolo A-Z") {
-            filteredGames = [...filteredGames].sort((a, z) => a.title.localeCompare(z.title))
-        } else if (sortOrder === "titolo Z-A") {
-            filteredGames = [...filteredGames].sort((a, z) => z.title.localeCompare(a.title))
-        } else if (sortOrder === "categoria A-Z") {
-            filteredGames = [...filteredGames].sort((a, z) => a.category.localeCompare(z.category))
-        } else if (sortOrder === "categoria Z-A") {
-            filteredGames = [...filteredGames].sort((a, z) => z.category.localeCompare(a.category))
+        // ordinamento titolo
+        if (sortTitleOrder === "titolo A-Z") {
+            filteredGames.sort((a, z) => a.title.localeCompare(z.title))
+        } else if (sortTitleOrder === "titolo Z-A") {
+            filteredGames.sort((a, z) => z.title.localeCompare(a.title))
+        }
+
+        // ordinamento categoria
+        if (sortCategoryOrder === "categoria A-Z") {
+            filteredGames.sort((a, z) => a.category.localeCompare(z.category))
+        } else if (sortCategoryOrder === "categoria Z-A") {
+            filteredGames.sort((a, z) => z.category.localeCompare(a.category))
         }
 
         return filteredGames
 
-    }, [search, boardGames, category, sortOrder])
+    }, [search, boardGames, category, sortTitleOrder, sortCategoryOrder])
 
 
     // reset dei filtri
@@ -76,8 +80,9 @@ export function GlobalProvider({ children }) {
     const filterReset = useCallback(() => {
         setSearch("")
         setCategory("seleziona")
-        setSortOrder("ordina")
-    }, [setSearch, setCategory, setSortOrder])
+        setSortTitleOrder("ordina")
+        setSortCategoryOrder("ordina")
+    }, [setSearch, setCategory, setSortTitleOrder, setSortCategoryOrder])
 
 
     // gestione comparazione
@@ -152,8 +157,10 @@ export function GlobalProvider({ children }) {
             setSearch,
             category,
             setCategory,
-            sortOrder,
-            setSortOrder,
+            sortTitleOrder,
+            setSortTitleOrder,
+            sortCategoryOrder,
+            setSortCategoryOrder,
             compareGames,
             compareBoardGames,
             clearCompare,
