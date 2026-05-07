@@ -1,16 +1,58 @@
-# React + Vite
+# 🎲 Dice Duel App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React application for browsing, filtering, and comparing board games.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Browse a list of board games
+- Search and filter by category
+- Sort by title and category
+- Add/remove favorites (saved in localStorage)
+- Compare up to 2 games
+- View detailed game information
 
-## React Compiler
+##  Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- JavaScript
+- CSS / Bootstrap
+- React Router
+- Context API
 
-## Expanding the ESLint configuration
+## Project Architecture
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This project follows a modular component-based architecture.
+
+- **Main pages** → List, Detail
+- **Components** → Reusable UI elements
+- **Context** → Global state management
+- **Custom Hooks** → Local storage handling
+
+## Folder Structure
+
+```
+src/
+├── components/
+├── pages/
+├── layouts/
+├── contexts/
+├── hooks/
+└── App.jsx
+```
+
+## What I learned
+
+- Managing global state with Context API
+- Optimizing performance with `useMemo`, `useCallback`, and `React.memo`
+- Implementing debounced search
+- Handling API calls and error states
+- Persisting data with localStorage
+
+## Project Context
+
+This project was developed as part of a Full Stack Web Development course.
+
+It was used as a final evaluation project to apply React concepts, state management, and API integration in a real-world scenario.
+
+- 7 working days
+- Final project presentation and evaluation
