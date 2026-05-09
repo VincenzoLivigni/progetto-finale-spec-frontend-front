@@ -56,3 +56,13 @@ It was used as a final evaluation project to apply React concepts, state managem
 
 - 7 working days
 - Final project presentation and evaluation
+
+## Visual Overview
+
+|                       Homepage                      |                      Wishlist                      |
+| :------------------------------------------------:  | :------------------------------------------------: |
+| ![Homepage](public/screenshots/homepage.png)        | ![Wishlist](public/screenshots/wishlist.png) |
+
+|                       Compare                       |                     Single Game                    |
+| :-------------------------------------------------: | :------------------------------------------------: |
+| ![Compare](public/screenshots/OverlayCompare.png)   | ![SingleGame](public/screenshots/singleGame.png)   |
