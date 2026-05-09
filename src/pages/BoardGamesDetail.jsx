@@ -45,7 +45,7 @@ export default function BoardGamesDetail() {
     return (
         <section className="py-4">
 
-            <div className="container">
+            <div className="container-fluid">
                 <h3>Dettaglio Gioco da tavolo</h3>
                 {
                     // messaggio di errore in caso di problemi con l'api

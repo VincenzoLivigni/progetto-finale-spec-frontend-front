@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import { memo } from "react";
+import images from "../data/images";
 
 function BoardGamesCard({ bg, compareBoardGames, isCompared, toggleFavorites, isFavorite }) {
 
     return (
         <div className="card_list mb-4 p-4 rounded-2">
+
+            <div className="card-img">
+                <img src={images[bg.id]} alt={bg.title} />
+            </div>
+
             <div className="card-body">
                 <h5>
                     <span className="fw-bold">Titolo: </span>
